@@ -24,6 +24,7 @@ $interestRate = (isset($_GET['interestRate'])) ? $_GET['interestRate'] : '';
 
 $timePeriodYearsTxt='';
 $timePeriodYears=0;
+$monthlyPayment=0;
 if(isset($_GET['timePeriodYearsTxt'])) {
 	$timePeriodYearsTxt = $_GET['timePeriodYearsTxt'];
     if($timePeriodYearsTxt == 'select_one') {
@@ -80,4 +81,22 @@ if($interestRate>0 && $timePeriodYears>0 && $loan>0) {
 		# Remaining Balance Formula: B = L[(1 + c)^n - (1 + c)^p]/[(1 + c)^n - 1]
 		# Where: L = Loan amount, c=monthly interest rate=Annual Interest Rate/12, P = Monthly payment, n = Month when the balance is paid in full, B = Remaining Balance
 	}
+
+	#variable to display the Loan Amount after form submission, data format being performed
+	$loanDisplay = number_format(floatval($loan), 2, '.', ',');
+
+	#variable to display the interest rate using logic based on interest type
+	if($interestType=='fixed') {
+		$interestRateDisplay = Round($interestRate,3).'% (constant rate monthly)';}
+		else {
+		$interestRateDisplay = Round($interestRate,3).'% ( +-1% variable rate monthly)';}
+
+	#variable to display the interest rate in monthly terms after from submission, based on interest type
+	if($interestType=='fixed') {
+		$interestRateMonthlyDisplay = Round($interestRate/12,3).'%';}
+		else {
+		$interestRateMonthlyDisplay = Round(($interestRate-1)/12,3).' - '.Round(($interestRate+1)/12,3).'%';}
+
+		#variable to display the estimated monthly payment after form submission, data format being performed
+		$monthlyPaymentDisplay = number_format(floatval($monthlyPayment), 2, '.', ',');
 ?>

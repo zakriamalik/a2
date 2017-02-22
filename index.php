@@ -44,14 +44,11 @@
           <input type='button' name='reset' class='btn btn-primary btn-small' onclick="parent.location='../assignment2/index.php'" value='Reset Form'>
                     <!-- Rsetse Button - Got ideas from:  http://www.plus2net.com/html_tutorial/button-linking.php -->
 
-          <?php if(isset($errors)): ?>
+          <?php if(isset($errors)): $x=0;?>
                <div class='alert alert-danger'>
                    <ul>
-                     <?php $x=0; ?>
-                       <?php foreach($errors as $error):?>
-                            <?php $x++; ?>
+                       <?php foreach($errors as $error): $x++;?>
                            <li><?=$x?>) <?=$error?></li>
-
                        <?php endforeach; ?>
                    </ul>
                </div>
@@ -61,49 +58,16 @@
 <?php if($_GET && $x==0): ?>
     <div>
       <h2>Mortgage Information</h2>
-      Loan Amount: $<?=number_format($loan , 2, '.', ',')?></br>
+      Loan Amount: $<?=$loanDisplay?></br>
       Interest Type: <?=$interestType?></br>
-      Interest Rate (Annual): <?=Round($interestRate,3)?>%<?php if($interestType=='fixed') {echo " (constant rate monthly)";} else {echo "( +-1% variable rate monthly)";}?></br>
-      Interest Rate (Monthly): <?php if($interestType=='fixed') {echo Round($interestRate/12,3);} else {echo Round(($interestRate-1)/12,3); echo " - "; echo Round(($interestRate+1)/12,3);}?>%</br>
+      Interest Rate (Annual): <?=$interestRateDisplay?></br>
+      Interest Rate (Monthly): <?=$interestRateMonthlyDisplay?></br>
       Time in Months: <?=$timePeriodMonths?></br>
-      Estimated Monthly Payment: $<?=number_format($monthlyPayment , 2, '.', ',')?></br></br>
+      Estimated Monthly Payment: $<?=$monthlyPaymentDisplay?></br></br>
     </div>
 <?php endif; ?>
 
-    <?php if(!empty($_GET['show_table'])) {
-    #$interestType='Variable';
-    echo "<table id='tblAmortSchedule'>"; #http://stackoverflow.com/questions/4746079/how-to-create-a-html-table-from-a-php-array
-    echo "<tr>
-              <th>Pmt No</th>
-              <th>Loan Amount ($)</th>
-              <th>Interest Rate Monthly (%)</th>
-              <th>Monthly Payment ($)</th>
-              <th>Interest ($)</th>
-              <th>Principal ($)</th>
-              <th>Loan Balance ($)</th>
-           </tr>";
-    $results = '';
-    for($i = 1; $i <= $timePeriodMonths && $loan>0; $i++) {
-    $results .= $i.' ';
-    if($interestType=='fixed'){
-        $interestRateMonthly=$interestRateMonthly;
-    }
-    else {
-        $interestRateMonthly=(rand($interestRate*100+100,$interestRate*100-100))/10000/12;
-    }
-    echo "<tr> \n\r";
-    echo "<td>".$i."</td>";
-    echo "<td>".number_format($loan, 2, '.', ',')."</td>";
-    echo "<td>".number_format($interestRateMonthly*100, 2, '.', ',')."</td>";
-    echo "<td>".number_format($monthlyPayment, 2, '.', ',')."</td>";
-    echo "<td>".number_format($loan*$interestRateMonthly, 2, '.', ',')."</td>"; #http://homeguides.sfgate.com/calculate-principal-interest-mortgage-2409.html
-    echo "<td>".number_format($monthlyPayment-$loan*$interestRateMonthly, 2, '.', ',')."</td>";
-    echo "<td>".number_format($loan = $loan-($monthlyPayment-$loan*$interestRateMonthly), 2, '.', ',')."</td>"; #http://php.net/manual/en/function.number-format.php
-    echo "</tr>";
-    }
-   echo "</table>";
-   echo "Last row represents the remaining balance, if +ive money is owed to bank, if -ive consumer gets refund.";
- }
- ?>
-  </body>
+<?php include('php/amortTable.php'); ?>
+
+</body>
 </html>
