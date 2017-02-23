@@ -16,14 +16,17 @@
 <!--start of html body -->
   <body>
     <h1>Mortgage Calculator</h1>
-
+    <!--start of form -->
     <Form method='GET' action='index.php'>
+          <!--text input box for loan amount entry -->
           <label for='loan'>Loan Amount:</label>
-          <input type='text' name='loan' id='loan' value='<?=sanitize($loan)?>'></br>
+          <input type='number' step='0.01' min='1' name='loan' id='loan' value='<?=sanitize($loan)?>'></br>
 
+          <!--text input box for interest rate entry -->
           <label for='interestRate'>Interest Rate:</label>
-          <input type='text' name='interestRate' id='interestRate' value='<?=sanitize($interestRate)?>'></br>
+          <input type='number' step='0.001' min='1.01' name='interestRate' id='interestRate' value='<?=sanitize($interestRate)?>'></br>
 
+          <!--select downdown for duration of loan in years -->
           <label for='timePeriodYearsTxt'>Select loan duration</label>
           <select name='timePeriodYearsTxt' id='timePeriodYearsTxt'>
               <option value='select_one'>Select one</option>
@@ -35,16 +38,22 @@
               <option value='40 yrs' <?php if($timePeriodYearsTxt == '40 yrs') echo 'SELECTED'?>>40 yrs</option>
           </select></br>
 
+          <!--option radio buttons for type of interest rate -->
           <label for='interestType'>Interest Type:</label>
           <label><input type='radio' name='interestType' value='fixed' <?php if($interestType == 'fixed') echo 'CHECKED'?>> Fixed</label>
           <label><input type='radio' name='interestType' value='variable' <?php if($interestType == 'variable') echo 'CHECKED'?>> Variable</label></br>
-          <label><input type='checkbox' name='show_table' value='show_table' <?php if(isset($_GET['show_table'])) echo "CHECKED='CHECKED'"; ?> > Amortization Table</label></br>
-                <!--http://stackoverflow.com/questions/12541419/php-keep-checkbox-checked-after-submitting-form-->
+
+          <!--checkbox to show or hide amortization table -->
+          <label><input type='checkbox' name='show_table' value='show_table' <?php if(isset($_GET['show_table'])) echo "CHECKED='CHECKED'"; ?> > Display Amortization Table</label></br>
+          <!--Technique used based on method used on this website: http://stackoverflow.com/questions/12541419/php-keep-checkbox-checked-after-submitting-form-->
+
+          <!--submit & reset buttons -->
           <input type='submit' name='submit' class='btn btn-primary btn-small'>
           <input type='button' name='reset' class='btn btn-primary btn-small' onclick="parent.location='../assignment2/index.php'" value='Reset Form'>
-                    <!-- Rsetse Button - Got ideas from:  http://www.plus2net.com/html_tutorial/button-linking.php -->
+          <!--Technique for reset button, got ideas from Piazza forum and this website:  http://www.plus2net.com/html_tutorial/button-linking.php -->
 
-          <?php if(isset($errors)): $x=0;?>
+          <!--check for validation errors, if found, display and hald calculations, code leveraged from class lecture notes -->
+          <?php $x=0; if($errors): ?>
                <div class='alert alert-danger'>
                    <ul>
                        <?php foreach($errors as $error): $x++;?>
@@ -53,21 +62,29 @@
                    </ul>
                </div>
            <?php endif; ?>
-
     </form>
-<?php if($_GET && $x==0): ?>
-    <div>
-      <h2>Mortgage Information</h2>
-      Loan Amount: $<?=$loanDisplay?></br>
-      Interest Type: <?=$interestType?></br>
-      Interest Rate (Annual): <?=$interestRateDisplay?></br>
-      Interest Rate (Monthly): <?=$interestRateMonthlyDisplay?></br>
-      Time in Months: <?=$timePeriodMonths?></br>
-      Estimated Monthly Payment: $<?=$monthlyPaymentDisplay?></br></br>
-    </div>
-<?php endif; ?>
 
-<?php include('php/amortTable.php'); ?>
+    <!--conditional display of entry/input values and some converted values based on formulae in logic file (soc)-->
+    <?php if($_GET && $x==0): ?>
+        <div>
+          <h2>Mortgage Information</h2>
+          Loan Amount: $<?=$loanDisplay?></br>
+          Interest Type: <?=$interestType?></br>
+          Interest Rate (Annual): <?=$interestRateDisplay?></br>
+          Interest Rate (Monthly): <?=$interestRateMonthlyDisplay?></br>
+          Time in Months: <?=$timePeriodMonths?></br>
+          Estimated Monthly Payment: $<?=$monthlyPaymentDisplay?></br></br>
+        </div>
+    <?php endif; ?>
 
-</body>
+    <!--conditional display of mortgage amortization table, code stored on separate php files that has table display logic (soc)-->
+    <?php if(!empty($_GET['show_table']) && $_GET && $x==0): ?>
+        <div>
+          <h2>Mortgage Information</h2>
+          <?php include('php/amortTable.php'); ?>
+        </div>
+    <?php endif; ?>
+
+
+  </body>
 </html>
