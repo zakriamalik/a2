@@ -49,7 +49,7 @@
 
           <!--submit & reset buttons -->
           <input type='submit' name='submit' class='btn btn-primary btn-small'>
-          <input type='button' name='reset' class='btn btn-primary btn-small' onclick="parent.location='../assignment2/index.php'" value='Reset Form'>
+          <input type='button' name='reset' class='btn btn-primary btn-small' onclick="parent.location='../../index.php'" value='Reset Form'>
           <!--Technique for reset button, got ideas from Piazza forum and this website:  http://www.plus2net.com/html_tutorial/button-linking.php -->
 
           <!--check for validation errors, if found, display and hald calculations, code leveraged from class lecture notes -->
