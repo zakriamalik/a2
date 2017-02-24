@@ -35,7 +35,7 @@ echo "<td>".number_format($loan = $loan-($monthlyPayment-$loan*$interestRateMont
 echo "</tr>";
 }
 echo "</table>";
-echo "Last row represents the remaining balance, if +ive money is owed to bank, if -ive consumer gets refund.";
+echo "*Last row represents the remaining balance, if +ive money is owed to bank, if -ive consumer gets refund.";
 #Reference 1: Formula for Monthly interest calculations: http://homeguides.sfgate.com/calculate-principal-interest-mortgage-2409.html
 #Reference 2: Learned and leveraged this site to understand syntax for number format function. http://php.net/manual/en/function.number-format.php
 ?>

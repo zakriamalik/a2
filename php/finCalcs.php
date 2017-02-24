@@ -13,8 +13,8 @@ if($form->isSubmitted()) {
         [
             'loan' => 'required|float|min:1|max:10000000',
             'interestRate' => 'required|float|min:1|max:25',
-            'loanDuration' => 'chooseOne',
-            'interestType' => 'required'
+            'interestType' => 'required',
+            'loanDuration' => 'chooseOne'
         ]
     );
 }

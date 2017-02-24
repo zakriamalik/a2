@@ -20,16 +20,16 @@
     <Form method='GET' action='index.php'>
           <!--text input box for loan amount entry -->
           <label for='loan'>Loan Amount:</label>
-          <input type='number' step='0.01' min='1' name='loan' id='loan' value='<?=sanitize($loan)?>'></br>
+          <input type='number' step='0.01' min='1' name='loan' id='loan' value='<?=sanitize($loan)?>'><br/>
 
           <!--text input box for interest rate entry -->
           <label for='interestRate'>Interest Rate:</label>
-          <input type='number' step='0.001' min='1.01' name='interestRate' id='interestRate' value='<?=sanitize($interestRate)?>'></br>
+          <input type='number' step='0.001' min='1.01' name='interestRate' id='interestRate' value='<?=sanitize($interestRate)?>'><br/>
 
           <!--option radio buttons for type of interest rate -->
-          <label for='interestType'>Interest Type:</label>
+          <label for='interestType'>Interest Type:</label><input type='hidden'>
           <label><input type='radio' name='interestType' value='fixed' <?php if($interestType == 'fixed') echo 'CHECKED'?>> Fixed</label>
-          <label><input type='radio' name='interestType' value='variable' <?php if($interestType == 'variable') echo 'CHECKED'?>> Variable</label></br>
+          <label><input type='radio' name='interestType' value='variable' <?php if($interestType == 'variable') echo 'CHECKED'?>> Variable</label><br/>
 
           <!--select downdown for duration of loan in years -->
           <label for='loanDuration'>Select loan duration</label>
@@ -41,10 +41,10 @@
               <option value='30 yrs' <?php if($loanDuration == '30 yrs') echo 'SELECTED'?>>30 yrs</option>
               <option value='35 yrs' <?php if($loanDuration == '35 yrs') echo 'SELECTED'?>>35 yrs</option>
               <option value='40 yrs' <?php if($loanDuration == '40 yrs') echo 'SELECTED'?>>40 yrs</option>
-          </select></br>
+          </select><br/>
 
           <!--checkbox to show or hide amortization table -->
-          <label><input type='checkbox' name='show_table' value='show_table' <?php if(isset($_GET['show_table'])) echo "CHECKED='CHECKED'"; ?> > Display Amortization Table</label></br>
+          <label><input type='checkbox' name='show_table' value='show_table' <?php if(isset($_GET['show_table'])) echo "CHECKED='CHECKED'"; ?> > Display Amortization Table</label><br/>
           <!--Technique used based on method used on this website: http://stackoverflow.com/questions/12541419/php-keep-checkbox-checked-after-submitting-form-->
 
           <!--submit & reset buttons -->
@@ -69,11 +69,11 @@
       <hr></hr>
         <div>
           <h2>Mortgage Information</h2>
-          Loan Amount: $<?=$loanDisplay?></br>
-          Interest Rate (Annual): <?=$interestRateDisplay?></br>
-          Interest Rate (Monthly): <?=$interestRateMonthlyDisplay?></br>
-          Interest Type: <?=$interestType?></br>
-          Loan Duration : <?=$loanDuration?> (<?=$timePeriodMonths?> months)</br>
+          Loan Amount: $<?=$loanDisplay?><br/>
+          Interest Rate (Annual): <?=$interestRateDisplay?><br/>
+          Interest Rate (Monthly): <?=$interestRateMonthlyDisplay?><br/>
+          Interest Type: <?=$interestType?><br/>
+          Loan Duration : <?=$loanDuration?> (<?=$timePeriodMonths?> months)<br/>
           <h4>Estimated Monthly Payment: $<?=$monthlyPaymentDisplay?></h4>
         </div>
     <?php endif; ?>
@@ -82,7 +82,7 @@
     <?php if(!empty($_GET['show_table']) && $_GET && $x==0): ?>
       <hr></hr>
         <div>
-          <h2>Mortgage Information</h2>
+          <h2>Mortgage Amortization Schedule</h2>
           <?php include('php/amortTable.php'); ?>
         </div>
     <?php endif; ?>
