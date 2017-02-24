@@ -15,6 +15,7 @@
 
 <!--start of html body -->
   <body>
+
     <h2>Mortgage Payment Calculator</h2>
     <!--start of form -->
     <Form method='GET' action='index.php'>
@@ -78,7 +79,7 @@
         </div>
     <?php endif; ?>
 
-    <!--conditional display of mortgage amortization table, code stored on separate php files that has table display logic (soc)-->
+    <!--conditional display of mortgage amortization table, code stored on separate php files that has table display & logic (soc)-->
     <?php if(!empty($_GET['show_table']) && $_GET && $x==0): ?>
       <hr></hr>
         <div>
@@ -87,6 +88,8 @@
         </div>
     <?php endif; ?>
 
-
+    <footer>
+            <p><a href="README.md">Read Me</a></p>
+    </footer>
   </body>
 </html>
