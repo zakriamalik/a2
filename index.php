@@ -83,7 +83,7 @@
       <hr></hr>
         <div>
           <h2>Mortgage Amortization Schedule</h2>
-          <?php include('php/amortTable.php'); ?>
+          <?php include('php/amortSchDisp.php'); ?>
         </div>
     <?php endif; ?>
 

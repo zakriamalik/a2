@@ -1,5 +1,5 @@
 # assignment 2
-# This assignment is about a Mortgage Calculator. The key intent is to provide a utility to a user to help determine estimated mortgage payment upon entry of certain required inputs like loan amount, duration, interest rate, and type. 
+# This assignment is about a Mortgage Payment Calculator. The key intent is to provide a utility to a user to help determine estimated mortgage payment upon entry of certain required inputs like loan amount, duration, interest rate, and type. 
 # Another feature is the Mortgage Amortization Schedule. This is a table that helps determines the loan payment schedule with visibility into the components of mortgage payment (interest and principal) and a burn-down table from start initial loan amount down to zero loan amount. 
 # Known Specifications & Conditions:
 # 1) The Loan amount entry range is from $1 to $10 million

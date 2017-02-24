@@ -1,6 +1,6 @@
 
 <?php
-
+# Display file to show amortization table schedule
 #Reference: Got ideas about tables from this website and developed code: http://stackoverflow.com/questions/4746079/how-to-create-a-html-table-from-a-php-array
 echo "<table id='tblAmortSchedule'>"; #Table declaration & generation
 echo "<tr>
@@ -12,26 +12,21 @@ echo "<tr>
           <th>Principal ($)</th>
           <th>Loan Balance ($)</th>
        </tr>"; #Table header
-$results = '';
-# Run a loop iterating from first monthly payment to the last (based on the number of months in the loan term)
-for($i = 1; $i <= $timePeriodMonths && $loan>0; $i++) {
-$results .= $i.' ';
-# condition to check up on fixed interest rate verses variable
-if($interestType=='fixed'){
-    $interestRateMonthly=$interestRateMonthly;
-}
-else {
-    $interestRateMonthly=(rand($interestRate*100+100,$interestRate*100-100))/10000/12;
-}
+
+ #$loanRemTbl=$loan;
+ # Run a loop iterating from first monthly payment to the last (based on the number of months in the loan term)
+ for($i = 1; $i <= $timePeriodMonths && $loan>0; $i++) {
+ $loanRemTbl = $loan;
+ include('php/amortSchLog.php');
 # Table rows 'tr' with columns 'td'. The table is populated dynamically as the loop runs from first payment to last
 echo "<tr> \n\r";
 echo "<td>".$i."</td>";
-echo "<td>".number_format($loan, 2, '.', ',')."</td>";
-echo "<td>".number_format($interestRateMonthly*100, 2, '.', ',')."</td>";
-echo "<td>".number_format($monthlyPayment, 2, '.', ',')."</td>";
-echo "<td>".number_format($loan*$interestRateMonthly, 2, '.', ',')."</td>"; #see reference 1 below
-echo "<td>".number_format($monthlyPayment-$loan*$interestRateMonthly, 2, '.', ',')."</td>";
-echo "<td>".number_format($loan = $loan-($monthlyPayment-$loan*$interestRateMonthly), 2, '.', ',')."</td>"; #see reference 2 below
+echo "<td>".$loanRemTbl."</td>";
+echo "<td>".$interestRateTbl."</td>";
+echo "<td>".$monthlyPmtTbl."</td>";
+echo "<td>".$interestPmtTbl."</td>"; #see reference 1 below
+echo "<td>".$principalPmtTbl."</td>";
+echo "<td>".$loanBalTbl."</td>"; #see reference 2 below
 echo "</tr>";
 }
 echo "</table>";
