@@ -3,16 +3,18 @@
 require('php/tools.php');
 require('php/Form.php');
 
+#Intantiating Class Form
+$form = new DWA\Form($_GET);
+
 #Validation Script (Leveraged the code shared in the class lectures)
 $errors=[];
-$form = new DWA\Form($_GET);
 if($form->isSubmitted()) {
     $errors = $form->validate(
         [
-            'loan' => 'float|min:1|max:10000000',
-            'interestRate' => 'float|min:1|max:25',
-						'interestType' => 'required',
-						'timePeriodYearsTxt' => 'chooseOne'
+            'loan' => 'required|float|min:1|max:10000000',
+            'interestRate' => 'required|float|min:1|max:25',
+            'loanDuration' => 'chooseOne',
+            'interestType' => 'required'
         ]
     );
 }
@@ -26,33 +28,33 @@ if($_GET) {
 #Load up input variables & Initialize where needed
 $loan = (isset($_GET['loan'])) ? $_GET['loan'] : '';
 $interestRate = (isset($_GET['interestRate'])) ? $_GET['interestRate'] : '';
-$timePeriodYearsTxt='';
+$loanDuration='';
 $interestType='';
 $monthlyPayment=0;
 
 #Handling of Select Dropdown Values (Leveraged the code shared in the class lectures)
 #Assigning values to variable based on selection made
-if(isset($_GET['timePeriodYearsTxt'])) {
-	$timePeriodYearsTxt = $_GET['timePeriodYearsTxt'];
-    if($timePeriodYearsTxt == 'select_one') {
+if(isset($_GET['loanDuration'])) {
+	$loanDuration = $_GET['loanDuration'];
+    if($loanDuration == 'select_one') {
         $timePeriodYears = 0;
     }
-    elseif($timePeriodYearsTxt == '15 yrs') {
+    elseif($loanDuration == '15 yrs') {
         $timePeriodYears = 15;
     }
-    elseif($timePeriodYearsTxt == '20 yrs') {
+    elseif($loanDuration == '20 yrs') {
         $timePeriodYears = 20;
     }
-    elseif($timePeriodYearsTxt == '25 yrs') {
+    elseif($loanDuration == '25 yrs') {
         $timePeriodYears = 25;
     }
-    elseif($timePeriodYearsTxt == '30 yrs') {
+    elseif($loanDuration == '30 yrs') {
         $timePeriodYears = 30;
     }
-    elseif($timePeriodYearsTxt == '35 yrs') {
+    elseif($loanDuration == '35 yrs') {
         $timePeriodYears = 35;
     }
-    elseif($timePeriodYearsTxt == '40 yrs') {
+    elseif($loanDuration == '40 yrs') {
         $timePeriodYears = 40;
     }
 }
