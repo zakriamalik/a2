@@ -27,7 +27,7 @@
           <input type='number' step='0.001' min='1.01' name='interestRate' id='interestRate' value='<?=sanitize($interestRate)?>'><br/>
 
           <!--option radio buttons for type of interest rate -->
-          <label for='interestType'>Interest Type:</label><input type='hidden'>
+          <b>Interest Type:</b>
           <label><input type='radio' name='interestType' value='fixed' <?php if($interestType == 'fixed') echo 'CHECKED'?>> Fixed</label>
           <label><input type='radio' name='interestType' value='variable' <?php if($interestType == 'variable') echo 'CHECKED'?>> Variable</label><br/>
 
